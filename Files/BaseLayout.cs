@@ -189,6 +189,18 @@ namespace Files
             App.CurrentInstance.NavigationToolbar.PathControlDisplayText = parameters;
         }
 
+        public async void ReloadItemsForWorkingDirectory(string overridePath = "")
+        {
+            if (string.IsNullOrWhiteSpace(overridePath))
+            {
+                await App.CurrentInstance.ViewModel.RefreshItems();
+            }
+            else
+            {
+                await App.CurrentInstance.ViewModel.RapidAddItemsToCollectionAsync(overridePath);
+            }
+        }
+
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             base.OnNavigatingFrom(e);

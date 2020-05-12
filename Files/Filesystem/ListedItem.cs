@@ -91,6 +91,7 @@ namespace Files.Filesystem
         public string FileExtension { get; set; }
         public string ItemPath { get; set; }
         public string FileSize { get; set; }
+        public int Tag { get; set; }
         public ulong FileSizeBytes { get; set; }
 
         public DateTimeOffset ItemDateModifiedReal

@@ -158,6 +158,12 @@
     <Compile Include="Helpers\ThemeHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ResourceController.cs" />
+    <Compile Include="UserControls\LayoutModes\ColumnLayoutView.xaml.cs">
+      <DependentUpon>ColumnLayoutView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\LayoutModes\ColumnPage.xaml.cs">
+      <DependentUpon>ColumnPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\NavigationToolbar\INavigationToolbar.cs" />
     <Compile Include="UserControls\NavigationToolbar\ModernNavigationToolbar.xaml.cs">
       <DependentUpon>ModernNavigationToolbar.xaml</DependentUpon>
@@ -194,6 +200,9 @@
     <Compile Include="Enums\TimeStyle.cs" />
     <Compile Include="Filesystem\DriveItem.cs" />
     <Compile Include="Filesystem\Drives.cs" />
+    <Compile Include="UserControls\NavigationToolbar\SimpleNavigationToolbar.xaml.cs">
+      <DependentUpon>SimpleNavigationToolbar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\StatusBarControl.xaml.cs">
       <DependentUpon>StatusBarControl.xaml</DependentUpon>
     </Compile>
@@ -358,6 +367,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="UserControls\LayoutModes\ColumnLayoutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\LayoutModes\ColumnPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UserControls\NavigationToolbar\ModernNavigationToolbar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -395,6 +412,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\LayoutModes\GenericFileBrowser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\NavigationToolbar\SimpleNavigationToolbar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
