@@ -147,6 +147,7 @@
     <Compile Include="CommandLine\ParsedCommands.cs" />
     <Compile Include="CommandLine\ParsedCommandType.cs" />
     <Compile Include="Converters\DoubleToGridLengthConverter.cs" />
+    <Compile Include="Converters\DoubleToTabStripIndentationConverter.cs" />
     <Compile Include="Converters\StorageDeleteOptionToBooleanConverter.cs" />
     <Compile Include="Dialogs\ConfirmDeleteDialog.xaml.cs">
       <DependentUpon>ConfirmDeleteDialog.xaml</DependentUpon>
