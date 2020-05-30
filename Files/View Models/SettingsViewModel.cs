@@ -493,6 +493,12 @@ namespace Files.View_Models
 
         public AcrylicTheme AcrylicTheme { get; set; }
 
+        public double SidebarWidth
+        {
+            get => Get(200.0);
+            set => Set(value);
+        }
+
         public int LayoutMode
         {
             get => Get(0); // List View

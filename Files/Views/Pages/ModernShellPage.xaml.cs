@@ -299,6 +299,11 @@ namespace Files.Views.Pages
                 }
             }
         }
+
+        private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            App.AppSettings.SidebarWidth = e.NewSize.Width;
+        }
     }
 
     public enum InteractionOperationType
