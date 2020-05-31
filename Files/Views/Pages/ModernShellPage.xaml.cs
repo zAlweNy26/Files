@@ -308,11 +308,16 @@ namespace Files.Views.Pages
                 }
             }
         }
+        //private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
+        //{
+        //    App.AppSettings.SidebarWidth = e.NewSize.Width;
+        //}
 
-        private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            App.AppSettings.SidebarWidth = e.NewSize.Width;
-        }
+        //private void GridSplitter_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
+        //{
+        //    App.AppSettings.SidebarWidth = SidebarGrid.ActualWidth;
+        //    e.Handled = true;
+        //}
     }
 
     public enum InteractionOperationType

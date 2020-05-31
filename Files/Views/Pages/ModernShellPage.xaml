@@ -23,11 +23,11 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="{x:Bind local1:App.AppSettings.SidebarWidth, Mode=OneTime, Converter={StaticResource DoubleToGridLengthConverterKey}}" MaxWidth="598" MinWidth="200" />
+            <ColumnDefinition x:Name="SidebarColumn" Width="{x:Bind local1:App.AppSettings.SidebarWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DoubleToGridLengthConverterKey}}" MaxWidth="348" MinWidth="200" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Grid SizeChanged="Grid_SizeChanged" HorizontalAlignment="Stretch">
+        <Grid x:Name="SidebarGrid" HorizontalAlignment="Stretch">
             <controls:ModernSidebar HorizontalAlignment="Stretch" x:Name="SidebarControl" Margin="0,-32,0,0" />
         </Grid>
         <Custom:GridSplitter Element="{x:Null}" HorizontalAlignment="Right" BorderThickness="0" Background="Transparent" GripperCursor="SizeWestEast" GripperForeground="Transparent"  ResizeBehavior="CurrentAndNext"/>
