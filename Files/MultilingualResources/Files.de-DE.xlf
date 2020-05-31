@@ -695,6 +695,22 @@
           <source>Selection options</source>
           <target state="new">Selection options</target>
         </trans-unit>
+        <trans-unit id="FileInUseDeleteDialog.Text" translate="yes" xml:space="preserve">
+          <source>The file you're trying to delete is currently being used by an another application.</source>
+          <target state="new">The file you're trying to delete is currently being used by an another application.</target>
+        </trans-unit>
+        <trans-unit id="FileInUseDeleteDialog.Title" translate="yes" xml:space="preserve">
+          <source>File is in use</source>
+          <target state="new">File is in use</target>
+        </trans-unit>
+        <trans-unit id="FileInUseDeleteDialog.PrimaryButtonText" translate="yes" xml:space="preserve">
+          <source>Try again</source>
+          <target state="new">Try again</target>
+        </trans-unit>
+        <trans-unit id="FileInUseDeleteDialog.SecondaryButtonText" translate="yes" xml:space="preserve">
+          <source>OK</source>
+          <target state="new">OK</target>
+        </trans-unit>
         <trans-unit id="PropertiesDialogReadOnly.Content" translate="yes" xml:space="preserve">
           <source>Read-only</source>
           <target state="new">Read-only</target>
@@ -702,6 +718,18 @@
         <trans-unit id="PropertiesDialogHidden.Content" translate="yes" xml:space="preserve">
           <source>Hidden</source>
           <target state="new">Hidden</target>
+        </trans-unit>
+        <trans-unit id="BaseLayoutContextFlyoutEmptyRecycleBin.Text" translate="yes" xml:space="preserve">
+          <source>Empty recycle bin</source>
+          <target state="new">Empty recycle bin</target>
+        </trans-unit>
+        <trans-unit id="BaseLayoutItemContextFlyoutRestore.Text" translate="yes" xml:space="preserve">
+          <source>Restore</source>
+          <target state="new">Restore</target>
+        </trans-unit>
+        <trans-unit id="SettingsExperimentalRecycleBin.Text" translate="yes" xml:space="preserve">
+          <source>Enable Recycle Bin support</source>
+          <target state="new">Enable Recycle Bin support</target>
         </trans-unit>
       </group>
     </body>
