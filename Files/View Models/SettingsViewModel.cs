@@ -496,7 +496,10 @@ namespace Files.View_Models
         public double SidebarWidth
         {
             get => Get(200.0);
-            set => Set(value);
+            set 
+            {
+                Set(value);
+            } 
         }
 
         public int LayoutMode
