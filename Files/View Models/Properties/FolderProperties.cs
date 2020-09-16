@@ -83,7 +83,7 @@ namespace Files.View_Models.Properties
             var isItemSelected = await CoreApplication.MainView.ExecuteOnUIThreadAsync(() => App.CurrentInstance.ContentPage.IsItemSelected);
             if (isItemSelected)
             {
-                storageFolder = await ItemViewModel.GetFolderFromPathAsync(Item.ItemPath);
+                storageFolder = await ItemViewModel.StorageItemAbstractions.GetFolderFromPathAsync(Item.ItemPath);
                 ViewModel.ItemCreatedTimestamp = ListedItem.GetFriendlyDate(storageFolder.DateCreated);
                 GetOtherProperties(storageFolder.Properties);
                 GetFolderSize(storageFolder, TokenSource.Token);
@@ -133,7 +133,7 @@ namespace Files.View_Models.Properties
                 }
                 else
                 {
-                    storageFolder = await ItemViewModel.GetFolderFromPathAsync(parentDirectory.ItemPath);
+                    storageFolder = await ItemViewModel.StorageItemAbstractions.GetFolderFromPathAsync(parentDirectory.ItemPath);
                     ViewModel.ItemCreatedTimestamp = ListedItem.GetFriendlyDate(storageFolder.DateCreated);
                     GetOtherProperties(storageFolder.Properties);
                     GetFolderSize(storageFolder, TokenSource.Token);

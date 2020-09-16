@@ -76,7 +76,7 @@ namespace Files.Interacts
             if (UserProfilePersonalizationSettings.IsSupported())
             {
                 // Get the path of the selected file
-                StorageFile sourceFile = await ItemViewModel.GetFileFromPathAsync(CurrentInstance.ContentPage.SelectedItem.ItemPath);
+                StorageFile sourceFile = await ItemViewModel.StorageItemAbstractions.GetFileFromPathAsync(CurrentInstance.ContentPage.SelectedItem.ItemPath);
 
                 // Get the app's local folder to use as the destination folder.
                 StorageFolder localFolder = ApplicationData.Current.LocalFolder;
@@ -325,7 +325,7 @@ namespace Files.Interacts
             {
                 var folderPath = Path.GetDirectoryName(item.TargetPath);
                 // Check if destination path exists
-                var destFolder = await ItemViewModel.GetFolderWithPathFromPathAsync(folderPath);
+                var destFolder = await ItemViewModel.StorageItemAbstractions.GetFolderWithPathFromPathAsync(folderPath);
                 App.CurrentInstance.ContentFrame.Navigate(AppSettings.GetLayoutType(), folderPath);
             }
             catch (FileNotFoundException)
@@ -362,7 +362,7 @@ namespace Files.Interacts
                     var clickedOnItemPath = clickedOnItem.ItemPath;
                     if (clickedOnItem.PrimaryItemAttribute == StorageItemTypes.Folder)
                     {
-                        var childFolder = await ItemViewModel.GetFolderWithPathFromPathAsync(
+                        var childFolder = await ItemViewModel.StorageItemAbstractions.GetFolderWithPathFromPathAsync(
                             (clickedOnItem as ShortcutItem)?.TargetPath ?? clickedOnItem.ItemPath);
 
                         // Add location to MRU List
@@ -385,7 +385,7 @@ namespace Files.Interacts
                         {
                             if (!shortcutItem.IsUrl)
                             {
-                                var childFile = await ItemViewModel.GetFileWithPathFromPathAsync(shortcutItem.TargetPath);
+                                var childFile = await ItemViewModel.StorageItemAbstractions.GetFileWithPathFromPathAsync(shortcutItem.TargetPath);
                                 // Add location to MRU List
                                 mostRecentlyUsed.Add(childFile.File, childFile.Path);
                             }
@@ -394,7 +394,7 @@ namespace Files.Interacts
                     }
                     else
                     {
-                        var childFile = await ItemViewModel.GetFileWithPathFromPathAsync(clickedOnItem.ItemPath);
+                        var childFile = await ItemViewModel.StorageItemAbstractions.GetFileWithPathFromPathAsync(clickedOnItem.ItemPath);
                         // Add location to MRU List
                         mostRecentlyUsed.Add(childFile.File, childFile.Path);
 
@@ -416,7 +416,7 @@ namespace Files.Interacts
                                 StorageFileQueryResult fileQueryResult = null;
 
                                 //Get folder to create a file query (to pass to apps like Photos, Movies & TV..., needed to scroll through the folder like what Windows Explorer does)
-                                StorageFolder currFolder = await ItemViewModel.GetFolderFromPathAsync(Path.GetDirectoryName(clickedOnItem.ItemPath));
+                                StorageFolder currFolder = await ItemViewModel.StorageItemAbstractions.GetFolderFromPathAsync(Path.GetDirectoryName(clickedOnItem.ItemPath));
 
                                 QueryOptions queryOptions = new QueryOptions(CommonFileQuery.DefaultQuery, null);
 
@@ -492,7 +492,7 @@ namespace Files.Interacts
                     foreach (ListedItem clickedOnItem in CurrentInstance.ContentPage.SelectedItems.Where(x => x.PrimaryItemAttribute == StorageItemTypes.File
                         && !x.IsShortcutItem))
                     {
-                        var childFile = await ItemViewModel.GetFileWithPathFromPathAsync(clickedOnItem.ItemPath);
+                        var childFile = await ItemViewModel.StorageItemAbstractions.GetFileWithPathFromPathAsync(clickedOnItem.ItemPath);
                         // Add location to MRU List
                         mostRecentlyUsed.Add(childFile.File, childFile.Path);
 
@@ -647,12 +647,12 @@ namespace Files.Interacts
                 }
                 else if (item.PrimaryItemAttribute == StorageItemTypes.Folder)
                 {
-                    var folderAsItem = await ItemViewModel.GetFolderFromPathAsync(item.ItemPath);
+                    var folderAsItem = await ItemViewModel.StorageItemAbstractions.GetFolderFromPathAsync(item.ItemPath);
                     items.Add(folderAsItem);
                 }
                 else
                 {
-                    var fileAsItem = await ItemViewModel.GetFileFromPathAsync(item.ItemPath);
+                    var fileAsItem = await ItemViewModel.StorageItemAbstractions.GetFileFromPathAsync(item.ItemPath);
                     items.Add(fileAsItem);
                 }
             }
@@ -769,12 +769,12 @@ namespace Files.Interacts
                 {
                     if (item.PrimaryItemAttribute == StorageItemTypes.Folder)
                     {
-                        var folder = await ItemViewModel.GetFolderFromPathAsync(item.ItemPath);
+                        var folder = await ItemViewModel.StorageItemAbstractions.GetFolderFromPathAsync(item.ItemPath);
                         await folder.RenameAsync(newName, NameCollisionOption.FailIfExists);
                     }
                     else
                     {
-                        var file = await ItemViewModel.GetFileFromPathAsync(item.ItemPath);
+                        var file = await ItemViewModel.StorageItemAbstractions.GetFileFromPathAsync(item.ItemPath);
                         await file.RenameAsync(newName, NameCollisionOption.FailIfExists);
                     }
                 }
@@ -803,7 +803,7 @@ namespace Files.Interacts
                     {
                         if (item.PrimaryItemAttribute == StorageItemTypes.Folder)
                         {
-                            var folder = await ItemViewModel.GetFolderFromPathAsync(item.ItemPath);
+                            var folder = await ItemViewModel.StorageItemAbstractions.GetFolderFromPathAsync(item.ItemPath);
 
                             await folder.RenameAsync(newName, NameCollisionOption.GenerateUniqueName);
 
@@ -811,7 +811,7 @@ namespace Files.Interacts
                         }
                         else
                         {
-                            var file = await ItemViewModel.GetFileFromPathAsync(item.ItemPath);
+                            var file = await ItemViewModel.StorageItemAbstractions.GetFileFromPathAsync(item.ItemPath);
 
                             await file.RenameAsync(newName, NameCollisionOption.GenerateUniqueName);
                         }
@@ -820,7 +820,7 @@ namespace Files.Interacts
                     {
                         if (item.PrimaryItemAttribute == StorageItemTypes.Folder)
                         {
-                            var folder = await ItemViewModel.GetFolderFromPathAsync(item.ItemPath);
+                            var folder = await ItemViewModel.StorageItemAbstractions.GetFolderFromPathAsync(item.ItemPath);
 
                             await folder.RenameAsync(newName, NameCollisionOption.ReplaceExisting);
 
@@ -828,7 +828,7 @@ namespace Files.Interacts
                         }
                         else
                         {
-                            var file = await ItemViewModel.GetFileFromPathAsync(item.ItemPath);
+                            var file = await ItemViewModel.StorageItemAbstractions.GetFileFromPathAsync(item.ItemPath);
 
                             await file.RenameAsync(newName, NameCollisionOption.ReplaceExisting);
                         }
@@ -855,20 +855,20 @@ namespace Files.Interacts
                         var recycleBinItem = listedItem as RecycleBinItem;
                         if (listedItem.PrimaryItemAttribute == StorageItemTypes.Folder)
                         {
-                            StorageFolder sourceFolder = await ItemViewModel.GetFolderFromPathAsync(recycleBinItem.ItemPath);
-                            StorageFolder destFolder = await ItemViewModel.GetFolderFromPathAsync(Path.GetDirectoryName(recycleBinItem.ItemOriginalPath));
+                            StorageFolder sourceFolder = await ItemViewModel.StorageItemAbstractions.GetFolderFromPathAsync(recycleBinItem.ItemPath);
+                            StorageFolder destFolder = await ItemViewModel.StorageItemAbstractions.GetFolderFromPathAsync(Path.GetDirectoryName(recycleBinItem.ItemOriginalPath));
                             await MoveDirectoryAsync(sourceFolder, destFolder, recycleBinItem.ItemName);
                             await sourceFolder.DeleteAsync(StorageDeleteOption.PermanentDelete);
                         }
                         else
                         {
-                            var file = await ItemViewModel.GetFileFromPathAsync(recycleBinItem.ItemPath);
-                            var destinationFolder = await ItemViewModel.GetFolderFromPathAsync(Path.GetDirectoryName(recycleBinItem.ItemOriginalPath));
+                            var file = await ItemViewModel.StorageItemAbstractions.GetFileFromPathAsync(recycleBinItem.ItemPath);
+                            var destinationFolder = await ItemViewModel.StorageItemAbstractions.GetFolderFromPathAsync(Path.GetDirectoryName(recycleBinItem.ItemOriginalPath));
                             await file.MoveAsync(destinationFolder, Path.GetFileName(recycleBinItem.ItemOriginalPath), NameCollisionOption.GenerateUniqueName);
                         }
                         // Recycle bin also stores a file starting with $I for each item
                         var iFilePath = Path.Combine(Path.GetDirectoryName(recycleBinItem.ItemPath), Path.GetFileName(recycleBinItem.ItemPath).Replace("$R", "$I"));
-                        await (await ItemViewModel.GetFileFromPathAsync(iFilePath)).DeleteAsync(StorageDeleteOption.PermanentDelete);
+                        await (await ItemViewModel.StorageItemAbstractions.GetFileFromPathAsync(iFilePath)).DeleteAsync(StorageDeleteOption.PermanentDelete);
                     }
                     catch (UnauthorizedAccessException)
                     {
@@ -927,12 +927,12 @@ namespace Files.Interacts
 
                         if (listedItem.PrimaryItemAttribute == StorageItemTypes.File)
                         {
-                            var item = await ItemViewModel.GetFileFromPathAsync(listedItem.ItemPath);
+                            var item = await ItemViewModel.StorageItemAbstractions.GetFileFromPathAsync(listedItem.ItemPath);
                             items.Add(item);
                         }
                         else
                         {
-                            var item = await ItemViewModel.GetFolderFromPathAsync(listedItem.ItemPath);
+                            var item = await ItemViewModel.StorageItemAbstractions.GetFolderFromPathAsync(listedItem.ItemPath);
                             items.Add(item);
                         }
                     }
@@ -994,12 +994,12 @@ namespace Files.Interacts
                     {
                         if (listedItem.PrimaryItemAttribute == StorageItemTypes.File)
                         {
-                            var item = await ItemViewModel.GetFileFromPathAsync(listedItem.ItemPath);
+                            var item = await ItemViewModel.StorageItemAbstractions.GetFileFromPathAsync(listedItem.ItemPath);
                             items.Add(item);
                         }
                         else
                         {
-                            var item = await ItemViewModel.GetFolderFromPathAsync(listedItem.ItemPath);
+                            var item = await ItemViewModel.StorageItemAbstractions.GetFolderFromPathAsync(listedItem.ItemPath);
                             items.Add(item);
                         }
                     }
@@ -1141,7 +1141,7 @@ namespace Files.Interacts
         public async Task<string> GetHashForFile(ListedItem fileItem, string nameOfAlg, CancellationToken token, Microsoft.UI.Xaml.Controls.ProgressBar progress)
         {
             HashAlgorithmProvider algorithmProvider = HashAlgorithmProvider.OpenAlgorithm(nameOfAlg);
-            var itemFromPath = await ItemViewModel.GetFileFromPathAsync((fileItem as ShortcutItem)?.TargetPath ?? fileItem.ItemPath);
+            var itemFromPath = await ItemViewModel.StorageItemAbstractions.GetFileFromPathAsync((fileItem as ShortcutItem)?.TargetPath ?? fileItem.ItemPath);
             var stream = await itemFromPath.OpenStreamForReadAsync();
             var inputStream = stream.AsInputStream();
             var str = inputStream.AsStreamForRead();

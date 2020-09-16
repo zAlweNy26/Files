@@ -106,7 +106,7 @@ namespace Files.View_Models.Properties
             StorageFile file = null;
             try
             {
-                file = await ItemViewModel.GetFileFromPathAsync((Item as ShortcutItem)?.TargetPath ?? Item.ItemPath);
+                file = await ItemViewModel.StorageItemAbstractions.GetFileFromPathAsync((Item as ShortcutItem)?.TargetPath ?? Item.ItemPath);
             }
             catch (Exception ex)
             {

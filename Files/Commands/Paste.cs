@@ -115,7 +115,7 @@ namespace Files.Commands
                         {
                             ClonedDirectoryOutput pastedOutput = await CloneDirectoryAsync(
                                 (StorageFolder)item,
-                                await ItemViewModel.GetFolderFromPathAsync(destinationPath),
+                                await ItemViewModel.StorageItemAbstractions.GetFolderFromPathAsync(destinationPath),
                                 item.Name);
                             pastedSourceItems.Add(item);
                             pastedItems.Add(pastedOutput.FolderOutput);
@@ -137,7 +137,7 @@ namespace Files.Commands
                     {
                         StorageFile clipboardFile = (StorageFile)item;
                         StorageFile pastedFile = await clipboardFile.CopyAsync(
-                            await ItemViewModel.GetFolderFromPathAsync(destinationPath),
+                            await ItemViewModel.StorageItemAbstractions.GetFolderFromPathAsync(destinationPath),
                             item.Name,
                             NameCollisionOption.GenerateUniqueName);
                         pastedSourceItems.Add(item);

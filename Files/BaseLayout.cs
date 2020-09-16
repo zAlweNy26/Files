@@ -610,11 +610,11 @@ namespace Files
                 }
                 else if (item.PrimaryItemAttribute == StorageItemTypes.File)
                 {
-                    selectedStorageItems.Add(await ItemViewModel.GetFileFromPathAsync(item.ItemPath));
+                    selectedStorageItems.Add(await ItemViewModel.StorageItemAbstractions.GetFileFromPathAsync(item.ItemPath));
                 }
                 else if (item.PrimaryItemAttribute == StorageItemTypes.Folder)
                 {
-                    selectedStorageItems.Add(await ItemViewModel.GetFolderFromPathAsync(item.ItemPath));
+                    selectedStorageItems.Add(await ItemViewModel.StorageItemAbstractions.GetFolderFromPathAsync(item.ItemPath));
                 }
             }
 

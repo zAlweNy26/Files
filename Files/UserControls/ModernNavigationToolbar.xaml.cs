@@ -468,7 +468,7 @@ namespace Files.UserControls
                 IList<ListedItem> suggestions = null;
                 var expandedPath = StorageFileExtensions.GetPathWithoutEnvironmentVariable(sender.Text);
                 var folderPath = Path.GetDirectoryName(expandedPath) ?? expandedPath;
-                var folder = await ItemViewModel.GetFolderWithPathFromPathAsync(folderPath);
+                var folder = await ItemViewModel.StorageItemAbstractions.GetFolderWithPathFromPathAsync(folderPath);
                 var currPath = await folder.GetFoldersWithPathAsync(Path.GetFileName(expandedPath), (uint)maxSuggestions);
                 if (currPath.Count() >= maxSuggestions)
                 {
@@ -571,7 +571,7 @@ namespace Files.UserControls
 
             try
             {
-                var folder = await ItemViewModel.GetFolderWithPathFromPathAsync(pathItem.Path);
+                var folder = await ItemViewModel.StorageItemAbstractions.GetFolderWithPathFromPathAsync(pathItem.Path);
                 childFolders = await folder.GetFoldersWithPathAsync(string.Empty);
             }
             catch

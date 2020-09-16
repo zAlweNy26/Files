@@ -143,11 +143,11 @@ namespace Files.Commands
                 {
                     if (storItem.PrimaryItemAttribute == StorageItemTypes.File)
                     {
-                        item = await ItemViewModel.GetFileFromPathAsync(storItem.ItemPath, AppInstance);
+                        item = await ItemViewModel.StorageItemAbstractions.GetFileFromPathAsync(storItem.ItemPath, AppInstance);
                     }
                     else
                     {
-                        item = await ItemViewModel.GetFolderFromPathAsync(storItem.ItemPath, AppInstance);
+                        item = await ItemViewModel.StorageItemAbstractions.GetFolderFromPathAsync(storItem.ItemPath, AppInstance);
                     }
 
                     await item.DeleteAsync(deleteOption);
@@ -179,11 +179,11 @@ namespace Files.Commands
                     // try again
                     if (storItem.PrimaryItemAttribute == StorageItemTypes.File)
                     {
-                        item = await ItemViewModel.GetFileFromPathAsync(storItem.ItemPath, AppInstance);
+                        item = await ItemViewModel.StorageItemAbstractions.GetFileFromPathAsync(storItem.ItemPath, AppInstance);
                     }
                     else
                     {
-                        item = await ItemViewModel.GetFolderFromPathAsync(storItem.ItemPath, AppInstance);
+                        item = await ItemViewModel.StorageItemAbstractions.GetFolderFromPathAsync(storItem.ItemPath, AppInstance);
                     }
 
                     await item.DeleteAsync(deleteOption);
@@ -193,7 +193,7 @@ namespace Files.Commands
                 {
                     // Recycle bin also stores a file starting with $I for each item
                     var iFilePath = Path.Combine(Path.GetDirectoryName(storItem.ItemPath), Path.GetFileName(storItem.ItemPath).Replace("$R", "$I"));
-                    await (await ItemViewModel.GetFileFromPathAsync(iFilePath)).DeleteAsync(StorageDeleteOption.PermanentDelete);
+                    await (await ItemViewModel.StorageItemAbstractions.GetFileFromPathAsync(iFilePath)).DeleteAsync(StorageDeleteOption.PermanentDelete);
                 }
 
                 AppInstance.FilesystemViewModel.RemoveFileOrFolder(storItem);
