@@ -829,7 +829,7 @@ namespace Files.Filesystem
                 {
                     do
                     {
-                        if (((FileAttributes)findData.dwFileAttributes & FileAttributes.Hidden) != FileAttributes.Hidden && ((FileAttributes)findData.dwFileAttributes & FileAttributes.System) != FileAttributes.System)
+                        if (((FileAttributes)findData.dwFileAttributes & FileAttributes.System) != FileAttributes.System)
                         {
                             if (((FileAttributes)findData.dwFileAttributes & FileAttributes.Directory) != FileAttributes.Directory)
                             {
@@ -1267,6 +1267,7 @@ namespace Files.Filesystem
                 FileImage = null,
                 LoadFileIcon = false,
                 ItemPath = itemPath,
+                IsHiddenItem = ((FileAttributes)findData.dwFileAttributes & FileAttributes.Hidden) == FileAttributes.Hidden ? true : false,
                 LoadUnknownTypeGlyph = false,
                 FileSize = null,
                 FileSizeBytes = 0,
@@ -1387,6 +1388,7 @@ namespace Files.Filesystem
                             Arguments = (string)response.Message["Arguments"],
                             WorkingDirectory = (string)response.Message["WorkingDirectory"],
                             RunAsAdmin = (bool)response.Message["RunAsAdmin"],
+                            IsHiddenItem = ((FileAttributes)findData.dwFileAttributes & FileAttributes.Hidden) == FileAttributes.Hidden ? true : false,
                             IsUrl = isUrl,
                             ContainsFilesOrFolders = containsFilesOrFolders
                         });
@@ -1410,6 +1412,7 @@ namespace Files.Filesystem
                     ItemType = itemType,
                     ItemPath = itemPath,
                     FileSize = itemSize,
+                    IsHiddenItem = ((FileAttributes)findData.dwFileAttributes & FileAttributes.Hidden) == FileAttributes.Hidden ? true : false,
                     FileSizeBytes = itemSizeBytes
                 });
             }

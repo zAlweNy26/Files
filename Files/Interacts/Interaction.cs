@@ -360,7 +360,7 @@ namespace Files.Interacts
                 {
                     var clickedOnItem = CurrentInstance.ContentPage.SelectedItem;
                     var clickedOnItemPath = clickedOnItem.ItemPath;
-                    if (clickedOnItem.PrimaryItemAttribute == StorageItemTypes.Folder)
+                    if (clickedOnItem.PrimaryItemAttribute == StorageItemTypes.Folder && !clickedOnItem.IsHiddenItem)
                     {
                         var childFolder = await ItemViewModel.GetFolderWithPathFromPathAsync(
                             (clickedOnItem as ShortcutItem)?.TargetPath ?? clickedOnItem.ItemPath);
@@ -373,6 +373,21 @@ namespace Files.Interacts
 
                         CurrentInstance.ContentPage.AssociatedViewModel.IsFolderEmptyTextDisplayed = false;
                         CurrentInstance.ContentFrame.Navigate(sourcePageType, childFolder.Path, new SuppressNavigationTransitionInfo());
+                    }
+                    else if (clickedOnItem.IsHiddenItem)
+                    {
+                        if (clickedOnItem.PrimaryItemAttribute == StorageItemTypes.Folder)
+                        {
+                            await App.CurrentInstance.FilesystemViewModel.SetWorkingDirectory(clickedOnItemPath);
+                            CurrentInstance.NavigationToolbar.PathControlDisplayText = clickedOnItemPath;
+
+                            CurrentInstance.ContentPage.AssociatedViewModel.IsFolderEmptyTextDisplayed = false;
+                            CurrentInstance.ContentFrame.Navigate(sourcePageType, clickedOnItemPath, new SuppressNavigationTransitionInfo());
+                        }
+                        else if (clickedOnItem.PrimaryItemAttribute == StorageItemTypes.File)
+                        {
+
+                        }
                     }
                     else if (clickedOnItem.IsShortcutItem)
                     {
