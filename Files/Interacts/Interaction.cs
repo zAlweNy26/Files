@@ -217,7 +217,7 @@ namespace Files.Interacts
             {
                 var value = new ValueSet
                 {
-                    { "WorkingDirectory", string.IsNullOrEmpty(workingDir) ? App.CurrentInstance.FilesystemViewModel.WorkingDirectory : workingDir },
+                    { "WorkingDirectory", string.IsNullOrEmpty(workingDir) ? App.CurrentInstance?.FilesystemViewModel?.WorkingDirectory : workingDir },
                     { "Application", applicationPaths.FirstOrDefault() },
                     { "ApplicationList", JsonConvert.SerializeObject(applicationPaths) },
                 };
@@ -272,7 +272,7 @@ namespace Files.Interacts
             return null;
         }
 
-        public static void FindChildren<T>(List<T> results, DependencyObject startNode) where T : DependencyObject
+        public static void FindChildren<T>(IList<T> results, DependencyObject startNode) where T : DependencyObject
         {
             int count = VisualTreeHelper.GetChildrenCount(startNode);
             for (int i = 0; i < count; i++)
